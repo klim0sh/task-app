@@ -2,6 +2,7 @@ from models import Task
 from manager import TaskManager
 from validators import InvalidNameError, InvalidDateError, InvalidPriorityError, validate_date, validate_name_task, validate_priority
 from database import init_db
+#maaain
 def ask_task():
     while True:
         name = input("Enter a name of task: ").strip()
@@ -42,14 +43,15 @@ def mark_task(manager):
         except ValueError:
             print("Must be a number")
 def rem_task(manager):
-    if not manager.get_all():
+    tasks = manager.get_all()
+    if not tasks:
         print("No tasks yet")
         return
     manager.show_tasks()
     while True:
         try:
             index = (int(input("Enter task number: ")) - 1)
-            if 0 <= index < len(manager.get_all()):
+            if 0 <= index < len(tasks):
                 manager.remove(index)
                 print("Task deleted")
                 break
